@@ -2,7 +2,8 @@ dnl Process this file with autoconf to produce a configure script.
 AC_REVISION($Revision$)
 AC_PREREQ(2.64)
 AC_INIT(YXA, 1.0-current, yxa-devel@lists.su.se)
-REQUIRE_ERLANG="5.7.2 (Erlang/OTP R13B-1)"
+#REQUIRE_ERLANG="5.7.2 (Erlang/OTP R13B-1)"
+REQUIRE_ERLANG="5.9.1 (Erlang/OTP R15B01)"
 AC_CONFIG_SRCDIR([src/incomingproxy.erl])
 AC_CONFIG_AUX_DIR([scripts])
 
@@ -34,6 +35,9 @@ ERLANG_SUBST_LIB_VER(stdlib)
 ERLANG_SUBST_LIB_VER(yaws)
 ERLANG_SUBST_LIB_VER(crypto)
 ERLANG_SUBST_LIB_VER(public_key)
+
+AC_CHECK_FILE([${ERLANG_LIB_DIR_public_key}/include/OTP-PUB-KEY.hrl],[HAS_OTP_PUB_KEY_HRL="true"],[HAS_OTP_PUB_KEY_HRL="false"])
+AC_SUBST(HAS_OTP_PUB_KEY_HRL)
 
 AC_CONFIG_FILES(
 		Makefile \
